@@ -15,6 +15,7 @@ const [rowsPerPage, setRowsPerPage] =useState(10);
 const[open,setOpen]=useState(false)
 const [users,setUsers]=useState()
 const[edititem,setEdititem]=useState()
+const [counts,setCounts]=useState()
   useEffect(()=>{
 async function getdata(){
   const data=await axios.get(`http://localhost:9000/user/getallusers/?page=${page}`)
@@ -22,6 +23,7 @@ async function getdata(){
 setUsers(data.data.users)
 }
 getdata()
+setCounts(Math.floor(users.length/5))
   },[page])
  
 
@@ -63,7 +65,7 @@ setOpen(true)
 </table>
 <div className='rajesh'>
       
-      <Pagination count={10} variant="outlined" shape="rounded" />
+      <Pagination count={counts} variant="outlined" shape="rounded" />
       <TablePagination
       component="div"
       count={100}

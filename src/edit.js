@@ -84,7 +84,7 @@ setUsers(data.data.users)
          {edititem?.name}
           </Typography>
           <Typography gutterBottom>
-        <TextField value={edititem?.email} onChange={(e)=>setEmail(e.target.value)}/>
+        <TextField value={email} onChange={(e)=>setEmail(e.target.value)}/>
           </Typography>
           <Typography gutterBottom>
            {edititem?.createdat}
