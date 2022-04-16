@@ -60,7 +60,7 @@ setEmail(edititem?.email)
 },[edititem])
 
   const handleClickOpen = () => {
-    setOpen(true);
+    setOpen(1);
   };
   const handleClose = () => {
     setOpen(false);
