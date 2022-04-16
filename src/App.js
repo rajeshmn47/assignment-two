@@ -21,9 +21,10 @@ async function getdata(){
   const data=await axios.get(`http://localhost:9000/user/getallusers/?page=${page}`)
   console.log(data.data.users)
 setUsers(data.data.users)
+setCounts(Math.floor(data.data.pagecount/5))
 }
 getdata()
-setCounts(Math.floor(users?.length/5))
+
   },[page])
  
 
@@ -80,8 +81,7 @@ function pickColor() {
   </tr>)}
 </table>
 <div className='rajesh'>
-      
-      <Pagination count={Math.floor(users?.length/5)} variant="outlined" shape="rounded" />
+      <Pagination count={counts} variant="outlined" shape="rounded" onChange={(event)=>handleChangePage(event,newPage)}/>
       
     </div>
     <Edit open={open} setOpen={setOpen} edititem={edititem} setUsers={setUsers} page={page}/>
