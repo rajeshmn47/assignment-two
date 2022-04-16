@@ -66,6 +66,8 @@ setEmail(edititem?.email)
     setOpen(false);
   };
   const handleChange = async(editdata) => {
+    const dear=await axios.get(`https://assignmentrajesh.herokuapp.com/user/edituser/${edititem._id}`)
+    console.log(dear)
     const d=await axios.post(`https://assignmentrajesh.herokuapp.com/user/edituser/${edititem._id}`,{email:email})
     const data=await axios.get(`https://assignmentrajesh.herokuapp.com/user/getallusers/?page=${page}`)
 setUsers(data.data.users)
