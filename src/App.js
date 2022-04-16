@@ -18,7 +18,7 @@ const[edititem,setEdititem]=useState()
 const [counts,setCounts]=useState()
   useEffect(()=>{
 async function getdata(){
-  const data=await axios.get(`https://assignmenttworajesh.netlify.app/user/getallusers/?page=${page}`)
+  const data=await axios.get(`https://assignmentrajesh.herokuapp.com/user/getallusers/?page=${page}`)
   console.log(data.data.users)
 setUsers(data.data.users)
 setCounts(Math.floor(data.data.pagecount/5))
