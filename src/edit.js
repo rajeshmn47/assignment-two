@@ -66,8 +66,8 @@ setEmail(edititem?.email)
     setOpen(false);
   };
   const handleChange = async(editdata) => {
-    const d=await axios.post(`http://localhost:9000/user/edituser/${edititem._id}`,{email:email})
-    const data=await axios.get(`http://localhost:9000/user/getallusers/?page=${page}`)
+    const d=await axios.post(`https://assignmenttworajesh.netlify.app/user/edituser/${edititem._id}`,{email:email})
+    const data=await axios.get(`https://assignmenttworajesh.netlify.app/user/getallusers/?page=${page}`)
 setUsers(data.data.users)
     setOpen(false);
   };
