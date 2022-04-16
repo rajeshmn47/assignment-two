@@ -23,7 +23,7 @@ async function getdata(){
 setUsers(data.data.users)
 }
 getdata()
-setCounts(Math.floor(users.length/5))
+setCounts(Math.floor(users?.length/5))
   },[page])
  
 
@@ -40,6 +40,21 @@ setEdititem(k)
 setOpen(true)
 }
 
+function pickColor() {
+              
+  // Array containing colors
+  var colors = [
+      '#ff0000', '#00ff00', '#0000ff',
+      '#ff3333', '#ffff00', '#ff6600'
+  ];
+    
+  // selecting random color
+  var random_color = colors[Math.floor(
+          Math.random() * colors.length)];
+    
+  var x = document.getElementById('pick');
+  return random_color;
+} 
   return (
     <div className='container'>
      <div className='tablecontainer'>
@@ -53,7 +68,8 @@ setOpen(true)
   </tr>
   {users?.map((u,index)=>
   <tr className='rows'>
-    <td className='name'><span className='namehead'>
+    <td className='name'>
+      <span style={{backgroundColor:pickColor(), marginRight: '2vw',color: 'white',padding: '1vh 1vw'}}>
       {u?.name?.charAt(0)}</span>{u.name}</td>
     <td>{u.email}</td>
     <td>{u?.createdat?.slice(0,16)}</td>
@@ -65,15 +81,8 @@ setOpen(true)
 </table>
 <div className='rajesh'>
       
-      <Pagination count={counts} variant="outlined" shape="rounded" />
-      <TablePagination
-      component="div"
-      count={100}
-      page={page}
-      onPageChange={handleChangePage}
-      rowsPerPage={rowsPerPage}
-      onRowsPerPageChange={handleChangeRowsPerPage}
-    />
+      <Pagination count={Math.floor(users?.length/5)} variant="outlined" shape="rounded" />
+      
     </div>
     <Edit open={open} setOpen={setOpen} edititem={edititem} setUsers={setUsers} page={page}/>
 </div>
