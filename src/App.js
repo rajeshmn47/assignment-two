@@ -28,8 +28,9 @@ getdata()
   },[page])
  
 
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage);
+  const handleChangePage = (event,page) => {
+    console.log(page)
+    setPage(page)
   };
 
   const handleChangeRowsPerPage = (event) => {
@@ -81,7 +82,7 @@ function pickColor() {
   </tr>)}
 </table>
 <div className='rajesh'>
-      <Pagination count={counts} variant="outlined" shape="rounded" onChange={(event)=>handleChangePage(event,newPage)}/>
+      <Pagination count={counts} variant="outlined" shape="rounded" onChange={(event,page)=>handleChangePage(event,page)}/>
       
     </div>
     <Edit open={open} setOpen={setOpen} edititem={edititem} setUsers={setUsers} page={page}/>
