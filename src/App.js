@@ -6,7 +6,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Pagination from '@material-ui/lab/Pagination';
 import TablePagination from '@material-ui/core/TablePagination';
 import Edit from './edit'
-
+import Notify from './notification'
 
 function App() {
   
@@ -16,9 +16,10 @@ const[open,setOpen]=useState(false)
 const [users,setUsers]=useState()
 const[edititem,setEdititem]=useState()
 const [counts,setCounts]=useState()
+const[notifyopen,setNotifyopen]=useState()
   useEffect(()=>{
 async function getdata(){
-  const data=await axios.get(`https://assignmentrajesh.herokuapp.com/user/getallusers/?page=${page}`)
+  const data=await axios.get(`http://localhost:9000/user/getallusers/?page=${page}`)
   console.log(data.data.users)
 setUsers(data.data.users)
 setCounts(Math.floor(data.data.pagecount/5))
@@ -58,6 +59,7 @@ function pickColor() {
   return random_color;
 } 
   return (
+    <>
     <div className='container'>
      <div className='tablecontainer'>
 <table className='table'>
@@ -85,10 +87,12 @@ function pickColor() {
       <Pagination count={counts} variant="outlined" shape="rounded" onChange={(event,page)=>handleChangePage(event,page)}/>
       
     </div>
-    <Edit open={open} setOpen={setOpen} edititem={edititem} setUsers={setUsers} page={page}/>
+    <Edit open={open} setOpen={setOpen} edititem={edititem} setUsers={setUsers} page={page} notifyopen={notifyopen}
+    setNotifyopen={setNotifyopen}/>
 </div>
    </div>
-
+      <Notify notifyopen={notifyopen} setNotifyopen={setNotifyopen} />
+      </>
   );
 }
 

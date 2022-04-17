@@ -12,6 +12,7 @@ import { TextField } from '@material-ui/core';
 import { useState,useEffect } from 'react';
 import axios from 'axios'
 import { SettingsBackupRestoreSharp } from '@material-ui/icons';
+import Notify from './notification';
 
 const styles = (theme) => ({
   root: {
@@ -53,7 +54,8 @@ const DialogActions = withStyles((theme) => ({
   },
 }))(MuiDialogActions);
 
-export default function Edit({open,setOpen,edititem,setUsers,page}) {
+export default function Edit({open,setOpen,edititem,setUsers,page,notifyopen,setNotifyopen}) {
+
     const [email,setEmail]=useState()
 useEffect(()=>{
 setEmail(edititem?.email)
@@ -65,13 +67,14 @@ setEmail(edititem?.email)
   const handleClose = () => {
     setOpen(false);
   };
-  const handleChange = async(editdata) => {
-    const dear=await axios.get(`https://assignmentrajesh.herokuapp.com/user/edituser/${edititem._id}`)
-    console.log(dear)
-    const d=await axios.post(`https://assignmentrajesh.herokuapp.com/user/edituser`,{id:edititem._id,email:email})
-    const data=await axios.get(`https://assignmentrajesh.herokuapp.com/user/getallusers/?page=${page}`)
+  const handleChange = async(edititem) => {
+    const dear=await axios.get(`http://localhost:9000/user/edituser/${edititem._id}`)
+    console.log(edititem._id,email)
+    const d=await axios.post('http://localhost:9000/user/edituser',{id:edititem._id,email:email})
+    const data=await axios.get(`http://localhost:9000/user/getallusers/?page=${page}`)
 setUsers(data.data.users)
     setOpen(false);
+    setNotifyopen(true)
   };
 
   return (
@@ -93,11 +96,12 @@ setUsers(data.data.users)
           </Typography>
         </DialogContent>
         <DialogActions>
-          <Button autoFocus onClick={handleChange} color="primary">
+          <Button autoFocus onClick={()=>handleChange(edititem)} color="primary">
             Save changes
           </Button>
         </DialogActions>
       </Dialog>
+
     </div>
   );
 }
